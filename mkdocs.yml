@@ -1,0 +1,36 @@
+# pip install mkdocs-material
+# pip install "mkdocstrings[python]"
+# pip install mkdocs-gen-files
+# pip install mkdocs-section-index
+
+site_name: ai-common-utils
+repo_url: https://gitlab.smart-consulting.ru/bi/ai-packages/ai-common-utils
+repo_name: GitLab
+
+theme:
+  name: "material"
+
+
+plugins:
+- search
+- section-index
+
+- gen-files:
+    scripts:
+    - docs/gen_ref_pages.py
+
+- mkdocstrings:
+    watch:
+      - ./ai_common_utils
+    handlers:
+      python:
+        options:
+          filters:
+            - "!^_[^_]"
+            - "!venv.bin.activate_this"
+          docstring_style: numpy
+          docstring_section_style: table
+          show_if_no_docstring: true
+          line_length: 120
+          annotations_path: source
+          separate_signature: true
